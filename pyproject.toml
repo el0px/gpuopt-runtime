@@ -10,6 +10,15 @@ readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name = "Ethan Lopez"}]
 license = {file = "LICENSE"}
+keywords = [
+  "cuda",
+  "cuda-graphs",
+  "gpu",
+  "hugging-face",
+  "llm",
+  "llm-inference",
+  "pytorch",
+]
 dependencies = [
   "torch>=2.4",
   "transformers>=5.8,<6",
@@ -24,8 +33,10 @@ classifiers = [
 ]
 
 [project.urls]
+Homepage = "https://github.com/el0px/gpuopt-runtime"
 Source = "https://github.com/el0px/gpuopt-runtime"
 Issues = "https://github.com/el0px/gpuopt-runtime/issues"
+PyPI = "https://pypi.org/project/gpuopt-runtime/"
 
 [project.optional-dependencies]
 examples = ["accelerate>=1.0", "safetensors>=0.4"]

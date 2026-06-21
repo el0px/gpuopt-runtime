@@ -1,5 +1,10 @@
 # GPUOpt Runtime
 
+[![PyPI](https://img.shields.io/pypi/v/gpuopt-runtime)](https://pypi.org/project/gpuopt-runtime/)
+[![Python](https://img.shields.io/pypi/pyversions/gpuopt-runtime)](https://pypi.org/project/gpuopt-runtime/)
+[![Tests](https://github.com/el0px/gpuopt-runtime/actions/workflows/test.yml/badge.svg)](https://github.com/el0px/gpuopt-runtime/actions)
+[![License](https://img.shields.io/github/license/el0px/gpuopt-runtime)](LICENSE)
+
 I built this because a lot of smaller LLM workloads waste time launching the
 same CUDA operations over and over. GPUOpt captures that decode work once,
 checks the output, and reuses it when the next request has a compatible shape.
@@ -19,16 +24,16 @@ silently returning questionable output.
 
 ## Install
 
-For development:
+Install the release from PyPI:
 
 ```bash
-python -m pip install -e ".[examples,test]"
+python -m pip install gpuopt-runtime
 ```
 
-Or install the built wheel:
+To run the example, include its optional dependencies:
 
 ```bash
-python -m pip install gpuopt_runtime-0.1.0-py3-none-any.whl
+python -m pip install "gpuopt-runtime[examples]"
 ```
 
 ## Use it
@@ -57,6 +62,12 @@ print(result.metrics())
 The first compatible request captures and validates the graph. Later requests
 reuse it without paying that cost again.
 
+You can also run the included example directly from the repository:
+
+```bash
+python examples/qwen_greedy.py
+```
+
 ## Results so far
 
 | GPU | Eager SDPA | CUDA Graph | Steady state speedup | Exact |
@@ -66,6 +77,14 @@ reuse it without paying that cost again.
 
 These are Qwen2.5-0.5B greedy decode measurements, not a promise for every GPU
 or model. Cold requests also pay capture and validation costs.
+
+## Test your GPU
+
+I want results from more GPUs and models. If you try GPUOpt, open an issue with
+your GPU, model, PyTorch version, eager speed, graph speed, whether the tokens
+matched, and any fallback reason reported in the metrics.
+
+[Share a result or report a problem](https://github.com/el0px/gpuopt-runtime/issues/new)
 
 ## Current limits
 
